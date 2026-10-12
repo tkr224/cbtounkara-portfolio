@@ -42,6 +42,31 @@ node tools/render-video.mjs --vertical   # video/intro-9x16.mp4  (1080×1920, Ti
 
 Le rendu se fait image par image, donc la vidéo est parfaitement fluide quelle que soit la machine. Les vidéos n'ont pas de son : ajoute une musique dans ton logiciel de montage ou dans TikTok.
 
+## Vidéo promo (40 s)
+
+Une vidéo promo de 40 s, en 9:16 et 16:9, avec voix off, musique, bruitages et sous-titres. Elle reprend les couleurs et la typo du site.
+
+| Fichier | Rôle |
+| --- | --- |
+| `promo/content.js` | **Tous les textes** de la promo : projets, tarifs, voix off (avec minutage), contact |
+| `promo/captures/` | Captures réelles des projets (une capture = un cadre de navigateur dans la vidéo) |
+| `promo/index.html`, `promo.css`, `promo.js` | La composition animée (105 BPM, coupes sur le temps) |
+| `promo/miniature.html` | La miniature 1280×720 |
+| `tools/promo-audio.py` | Voix off (voix française « tom », Piper), musique, bruitages, ducking −8 dB |
+| `tools/render-promo.mjs` | Export MP4 image par image avec la bande-son |
+
+```bash
+pip install numpy scipy soundfile sherpa-onnx   # une seule fois
+node tools/render-promo.mjs            # video/promo-9x16.mp4 (génère aussi la bande-son)
+node tools/render-promo.mjs --wide     # video/promo-16x9.mp4
+node tools/render-promo.mjs --thumb    # video/promo-miniature.jpg
+```
+
+- Pour ajouter un projet à l'écran, dépose sa capture (1440 px de large) dans `promo/captures/` et renseigne `capture` dans `promo/content.js`. Sans capture, le projet apparaît seulement par son nom dans l'écran « Et aussi ».
+- `whatsapp` et `photo` dans `promo/content.js` ajoutent le numéro sous le bouton WhatsApp et ta photo ronde à la fin.
+- Les répliques déjà synthétisées sont réutilisées (`promo/build/vo/`). Supprime ce dossier pour régénérer la voix.
+- Pour prévisualiser : `npx serve .`, puis ouvre `/promo/` et clique sur « Lire la promo ».
+
 ## Mettre en ligne
 
 Le site fonctionne tel quel sur **Vercel**, **Netlify** ou **GitHub Pages** (dossier racine, sans étape de build).

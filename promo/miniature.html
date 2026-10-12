@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Miniature — Celso Tounkara</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="promo.css" />
+    <style>
+      /* Miniature 1280×720 — mêmes tokens que la vidéo */
+      .thumb {
+        position: relative;
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: var(--bg);
+        font-family: var(--font);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+      .thumb .mesh i {
+        filter: blur(60px);
+      }
+      .thumb .m1 {
+        width: 900px;
+        height: 700px;
+        right: -180px;
+        top: -220px;
+      }
+      .thumb .m2 {
+        width: 760px;
+        height: 760px;
+        left: -260px;
+        bottom: -420px;
+      }
+      .thumb .m3 {
+        width: 520px;
+        height: 520px;
+        left: 760px;
+        top: 360px;
+      }
+      .copy {
+        position: absolute;
+        left: 72px;
+        top: 70px;
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .copy .eyebrow {
+        font-size: 24px;
+      }
+      .copy h1 {
+        margin: 0;
+        font-size: 118px;
+        font-weight: 800;
+        letter-spacing: -0.055em;
+        line-height: 0.95;
+      }
+      .copy .price {
+        display: inline-flex;
+        align-self: flex-start;
+        align-items: baseline;
+        gap: 12px;
+        padding: 14px 26px;
+        border-radius: 99px;
+        background: var(--blue);
+        color: #fff;
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        box-shadow: 0 16px 40px rgba(0, 113, 227, 0.35);
+      }
+      .copy .price small {
+        font-size: 22px;
+        font-weight: 600;
+        opacity: 0.85;
+      }
+      .sign {
+        position: absolute;
+        left: 72px;
+        bottom: 56px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .sign .mark {
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        box-shadow: 0 0 40px rgba(41, 151, 255, 0.45);
+      }
+      .sign b {
+        display: block;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+      .sign span {
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--blue);
+      }
+      .shot {
+        position: absolute;
+        left: 690px;
+        top: 120px;
+        width: 640px;
+        perspective: 1600px;
+      }
+      .shot .browser {
+        transform: rotateY(-14deg) rotateX(6deg);
+        border-radius: 16px;
+      }
+      .shot .browser__bar {
+        height: 34px;
+        padding: 0 14px;
+        gap: 7px;
+      }
+      .shot .browser__bar i {
+        width: 10px;
+        height: 10px;
+      }
+      .shot .browser__url {
+        font-size: 13px;
+        padding: 4px 18px;
+      }
+      .shot .phone {
+        position: absolute;
+        right: 70px;
+        top: 150px;
+        width: 190px;
+        padding: 7px;
+        border-radius: 30px;
+        transform: rotateY(-10deg) rotate(4deg);
+      }
+      .shot .phone .viewport {
+        border-radius: 24px;
+      }
+      .shot .phone .viewport img {
+        height: 100%;
+        object-fit: cover;
+      }
+      .thumb .vignette--light {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thumb">
+      <div class="mesh"><i class="m1"></i><i class="m2"></i><i class="m3"></i></div>
+
+      <div class="shot">
+        <div class="browser">
+          <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">trouvetout224.site</span></div>
+          <div class="viewport"><img src="captures/trouvetout224.jpg" alt="" /></div>
+        </div>
+        <div class="phone">
+          <div class="viewport"><img src="captures/trouvetout224-mobile.jpg" alt="" /></div>
+        </div>
+      </div>
+
+      <div class="copy">
+        <div class="eyebrow">Développeur web freelance · Conakry</div>
+        <h1>Je crée ton <span class="grad">site.</span></h1>
+        <div class="price">Dès 700&#8239;000 <small>GNF</small></div>
+      </div>
+
+      <div class="sign">
+        <div class="mark">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M32 24 L10 50 L32 76" />
+            <path d="M58 14 L42 86" />
+            <path d="M68 24 L90 50 L68 76" />
+          </svg>
+        </div>
+        <div><b>Celso Tounkara</b><span>cbtounkara.online</span></div>
+      </div>
+
+      <div class="vignette vignette--light"></div>
+    </div>
+  </body>
+</html>
