@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: #ffffff;
+    color: #1d1d1f;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: #0071e3;
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0071e3;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8;
+  }
+
+  .section {
+    @apply py-[88px] md:py-[140px];
+  }
+
+  .display {
+    @apply font-extrabold tracking-display;
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #0071e3 0%, #34c7bd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* Les descendantes (g, j) ne sont pas rognées par le clip. */
+    padding-bottom: 0.08em;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-1 rounded-full text-[17px] font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-blue px-[22px] py-3 text-white hover:bg-blue-hover;
+  }
+
+  .btn-link {
+    @apply inline-flex items-center gap-1 text-[17px] font-medium text-blue hover:underline underline-offset-4;
+  }
+
+  .card {
+    @apply rounded-card;
+  }
+
+  .field {
+    @apply w-full rounded-[14px] border border-hair bg-white px-4 py-3.5 text-[17px] text-ink outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-[#86868b] focus:border-blue focus:shadow-[0_0_0_4px_rgba(0,113,227,.15)];
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Apparition du hero : opacité 0 → 1, translateY 28px → 0, en cascade.
+   Le décalage (--i × 150 ms) est posé en ligne sur chaque élément.
+   --------------------------------------------------------------------------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(0.1s + var(--i, 0) * 150ms);
+}
+
+/* Pendant le splash, le hero attend que l'overlay commence à se relever. */
+html.splash .rise {
+  animation-delay: calc(2.95s + var(--i, 0) * 150ms);
+}
+
+/* ---------------------------------------------------------------------------
+   Splash screen (accueil, une fois par session).
+   --------------------------------------------------------------------------- */
+.splash-overlay {
+  display: none;
+}
+
+html.splash .splash-overlay {
+  display: flex;
+  animation: splash-lift 1s cubic-bezier(0.76, 0, 0.24, 1) 2.5s forwards;
+}
+
+html.splash-lock body {
+  overflow: hidden;
+}
+
+@keyframes splash-lift {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.splash-dot {
+  position: relative;
+  animation: splash-pulse 1.4s ease-in-out infinite;
+}
+
+/* Onde qui s'échappe du point : uniquement transform et opacity. */
+.splash-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #0071e3;
+  animation: splash-wave 1.4s ease-out infinite;
+}
+
+@keyframes splash-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes splash-wave {
+  from {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+.splash-name {
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.splash-line {
+  transform-origin: left center;
+  animation: splash-draw 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.95s both;
+}
+
+@keyframes splash-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.splash-sub {
+  animation: splash-fade 0.7s ease-out 1.6s both;
+}
+
+@keyframes splash-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Apparition au scroll (IntersectionObserver). Masqué uniquement si le JS
+   tourne, pour que le contenu reste lisible sans script.
+   --------------------------------------------------------------------------- */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+
+.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Fond animé : flottement continu de chaque forme.
+   --------------------------------------------------------------------------- */
+@keyframes float {
+  from {
+    transform: translateY(-14px) rotate(0deg);
+  }
+  to {
+    transform: translateY(16px) rotate(7deg);
+  }
+}
+
+.bg-float {
+  animation: float var(--dur, 8s) ease-in-out var(--delay, 0s) infinite alternate;
+}
+
+.bg-parallax {
+  transform: translate3d(calc(var(--mx, 0) * var(--k) * 1px), calc(var(--my, 0) * var(--k) * 1px), 0);
+  transition: transform 0.5s ease-out;
+}
+
+/* Cartes projet */
+.project-card {
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.22);
+}
+
+.project-card img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover img {
+  transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
