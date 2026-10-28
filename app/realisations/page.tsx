@@ -7,7 +7,7 @@ import { PROJECTS } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata(
   "Réalisations",
-  "Sites conçus et développés par Celso Tounkara : TrouveTout224, Kora Festival, Le Baobab, TT Station, Groupe Nimba et Sérénité Spa.",
+  "Sites conçus et développés par Celso Tounkara : TrouveTout224, Dropbrief, La Fête des Couleurs, Kora Festival, Le Baobab, TT Station, Groupe Nimba et Sérénité Spa.",
   "/realisations",
 );
 
@@ -20,7 +20,7 @@ export default function RealisationsPage() {
       <PageHeader
         eyebrow="Réalisations"
         title="Des sites qui travaillent pour leurs clients."
-        intro="TrouveTout224 est une plateforme en production, utilisée chaque jour en Guinée. Les autres sont des concepts conçus et développés de A à Z."
+        intro="TrouveTout224, Dropbrief et La Fête des Couleurs sont en production. Les autres sont des concepts conçus et développés de A à Z."
       />
 
       <section className="container-site pb-[88px] pt-14 md:pb-[140px] md:pt-20">

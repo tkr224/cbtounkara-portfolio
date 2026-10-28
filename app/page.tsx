@@ -66,7 +66,7 @@ export default function HomePage() {
       <section className="container-site section pt-0 md:pt-0">
         <SectionTitle
           title="Réalisations."
-          intro="Une plateforme en production et des concepts conçus de A à Z."
+          intro="Des sites en production et des concepts conçus de A à Z."
           action={
             <Link href="/realisations" className="btn-link shrink-0">
               Tout voir <span aria-hidden="true">›</span>
